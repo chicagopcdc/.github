@@ -145,12 +145,12 @@ jobs:
               echo "Current repo: ${{ github.event.repository.full_name }} - Owner: ${{ github.repository_owner }}"
               echo "Head Repo: ${{ github.event.pull_request.head.repo.full_name }} - Owner: ${{ github.event.pull_request.head.repo.owner.login }}"
 
-              if [[ "${{ github.repository_owner }}" == "uc-cdis" && "${{ github.event.pull_request.head.repo.owner.login }}" != "uc-cdis" ]]; then
+              if [[ "${{ github.repository_owner }}" == "chicagopcdc" && "${{ github.event.pull_request.head.repo.owner.login }}" != "chicagopcdc" ]]; then
 
                   echo "::error::External PRs cannot run integration tests"
                   exit 1
               else
-                  echo "PR from fork is NOT a uc-cdis external PR: proceeding"
+                  echo "PR from fork is NOT a chicagopcdc external PR: proceeding"
               fi
 
           # Skip integration tests when the following PR labels are present:
@@ -189,7 +189,7 @@ jobs:
             if: ${{ env.SKIP_TESTS != 'true' && github.event.repository.name  != 'gen3-code-vigil' }}
             uses: actions/checkout@v6
             with:
-              repository: uc-cdis/gen3-code-vigil
+              repository: chicagopcdc/gen3-code-vigil
               ref: ${{ inputs.TEST_REPO_BRANCH }}
               path: gen3-code-vigil
 
@@ -198,8 +198,8 @@ jobs:
             if: ${{ env.SKIP_TESTS != 'true' }}
             uses: actions/checkout@v6
             with:
-              repository: uc-cdis/gen3-gitops
-              ref: ${{ env.REPO_FN == 'uc-cdis/gen3-gitops' && env.BRANCH || 'master' }}
+              repository: chicagopcdc/gen3-gitops
+              ref: ${{ env.REPO_FN == 'chicagopcdc/gen3-gitops' && env.BRANCH || 'master' }}
               path: gen3-gitops-ci
 
           - name: Get commit time
@@ -274,7 +274,7 @@ jobs:
                 sed -i "s|\(data-simulator[[:space:]]*=[[:space:]]*{[^}]*rev[[:space:]]*=[[:space:]]*\"\)[^\"]*\(.*\)|\1$BRANCH\2|" pyproject.toml
               fi
               if [[ "$REPO" == "gen3sdk-python" ]]; then
-                sed -i "s|^gen3 = \".*\"|gen3 = { git = \"https://github.com/uc-cdis/gen3sdk-python\", rev = \"$BRANCH\" }|" pyproject.toml
+                sed -i "s|^gen3 = \".*\"|gen3 = { git = \"https://github.com/chicagopcdc/gen3sdk-python\", rev = \"$BRANCH\" }|" pyproject.toml
               fi
               pip install poetry
               poetry lock

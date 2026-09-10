@@ -32,7 +32,7 @@ on:
 jobs:
   post-commit:
     name: Post-Commit Validation of Pre-Commit Checks
-    uses: uc-cdis/.github/.github/workflows/pre_commit.yaml@master
+    uses: chicagopcdc/.github/.github/workflows/pre_commit.yaml@master
 
   lint:
     name: Lint
@@ -47,14 +47,14 @@ jobs:
       - name: Checkout repo containing central linter config
         uses: actions/checkout@v6
         with:
-          repository: uc-cdis/.github
+          repository: chicagopcdc/.github
           persist-credentials: false
-          path: uc-cdis/.github
+          path: chicagopcdc/.github
           sparse-checkout: |
             .github/linters
 
       - name: Display files
-        run: ls -aR uc-cdis/.github/.github/
+        run: ls -aR chicagopcdc/.github/.github/
 
       - name: Set up python
         uses: actions/setup-python@v6
@@ -112,11 +112,11 @@ jobs:
         run: echo "Cache miss, saving the cache"
 
       - name: Update pylint config with Python module path
-        working-directory: uc-cdis/.github/.github/linters
+        working-directory: chicagopcdc/.github/.github/linters
         run: bash update_pylint_config.sh
 
       - name: Cat file(s)
-        working-directory: uc-cdis/.github/.github/linters
+        working-directory: chicagopcdc/.github/.github/linters
         run: cat .python-lint
 
       - name: Install pylint
@@ -126,4 +126,4 @@ jobs:
 
       - name: Lint Repo
         run: |
-          pylint . --rcfile uc-cdis/.github/.github/linters/.python-lint
+          pylint . --rcfile chicagopcdc/.github/.github/linters/.python-lint
