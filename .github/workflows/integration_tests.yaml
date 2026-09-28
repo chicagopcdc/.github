@@ -355,19 +355,19 @@ jobs:
               if [[ -n "$NAMESPACE_LABEL" ]]; then
                 echo "Namespace label is set: $NAMESPACE_LABEL"
                 NAMESPACE=${NAMESPACE_LABEL}
-                HOSTNAME=${NAMESPACE_LABEL}.ci.planx-pla.net
+                HOSTNAME=${NAMESPACE_LABEL}.pcdc-dev.pedscommons.org
               else
                 if [[ "$IS_NIGHTLY_RUN" == "true" ]]; then
                   if [[ "$CI_ENV" == "gen3ff" ]]; then
                     NAMESPACE=nightly-build-ff
-                    HOSTNAME=nightly-build-ff.ci.planx-pla.net
+                    HOSTNAME=nightly-build-ff.pcdc-dev.pedscommons.org
                   else
                     NAMESPACE=nightly-build
-                    HOSTNAME=nightly-build.ci.planx-pla.net
+                    HOSTNAME=nightly-build.pcdc-dev.pedscommons.org
                   fi
                 else
                   NAMESPACE=${REPO}-pr-${PR_NUM}
-                  HOSTNAME=${REPO}-pr-${PR_NUM}.ci.planx-pla.net
+                  HOSTNAME=${REPO}-pr-${PR_NUM}.pcdc-dev.pedscommons.org
                 fi
               fi
               HOSTNAME_PROTOCOL=https
@@ -613,31 +613,31 @@ jobs:
               if [ "${{ steps.upload_allure_report.outcome }}" == "success" ]; then
                 if [[ "$IS_NIGHTLY_RUN" == "true" ]]; then
                   DATE=$(date +%Y%m%d)
-                  echo -e "\nPlease find the detailed integration test report [here](https://allure.ci.planx-pla.net/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
+                  echo -e "\nPlease find the detailed integration test report [here](https://allure.pcdc-dev.pedscommons.org/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
                   if [ -n "$FAILED_TEST_SUITES" ]; then
-                    echo -e "\nPlease find the detailed integration test report after rerunning failed tests [here](https://allure.ci.planx-pla.net/nightly-run-$CI_ENV/$DATE-rerun/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
+                    echo -e "\nPlease find the detailed integration test report after rerunning failed tests [here](https://allure.pcdc-dev.pedscommons.org/nightly-run-$CI_ENV/$DATE-rerun/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
                   fi
                 else
-                  echo -e "\nPlease find the detailed integration test report [here](https://allure.ci.planx-pla.net/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
+                  echo -e "\nPlease find the detailed integration test report [here](https://allure.pcdc-dev.pedscommons.org/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/index.html)" >> output/report.md
                   if [ -n "$FAILED_TEST_SUITES" ]; then
-                    echo -e "\nPlease find the detailed integration test report after rerunning failed tests [here](https://allure.ci.planx-pla.net/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM-rerun/index.html)" >> output/report.md
+                    echo -e "\nPlease find the detailed integration test report after rerunning failed tests [here](https://allure.pcdc-dev.pedscommons.org/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM-rerun/index.html)" >> output/report.md
                   fi
                 fi
               fi
               if [ "${{ steps.upload_gh_action_logs.outcome }}" == "success" ]; then
                 if [[ "$IS_NIGHTLY_RUN" == "true" ]]; then
                   DATE=$(date +%Y%m%d)
-                  echo -e "\nPlease find the Github Action logs [here](https://allure.ci.planx-pla.net/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/gh_action_logs.txt)" >> output/report.md
+                  echo -e "\nPlease find the Github Action logs [here](https://allure.pcdc-dev.pedscommons.org/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/gh_action_logs.txt)" >> output/report.md
                 else
-                  echo -e "\nPlease find the Github Action logs [here](https://allure.ci.planx-pla.net/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/gh_action_logs.txt)" >> output/report.md
+                  echo -e "\nPlease find the Github Action logs [here](https://allure.pcdc-dev.pedscommons.org/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/gh_action_logs.txt)" >> output/report.md
                 fi
               fi
               # if [ "${{ steps.upload_analyze_failure_file_logs.outcome }}" == "success" ]; then
               #   if [[ "$IS_NIGHTLY_RUN" == "true" ]]; then
               #     DATE=$(date +%Y%m%d)
-              #     echo -e "\nPlease find the Github Action logs [here](https://allure.ci.planx-pla.net/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/failure_analysis.txt)" >> output/report.md
+              #     echo -e "\nPlease find the Github Action logs [here](https://allure.pcdc-dev.pedscommons.org/nightly-run-$CI_ENV/$DATE/$RUN_NUM/$ATTEMPT_NUM/failure_analysis.txt)" >> output/report.md
               #   else
-              #     echo -e "\nPlease find the Github Action logs [here](https://allure.ci.planx-pla.net/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/failure_analysis.txt)" >> output/report.md
+              #     echo -e "\nPlease find the Github Action logs [here](https://allure.pcdc-dev.pedscommons.org/$REPO/$PR_NUM/$RUN_NUM/$ATTEMPT_NUM/failure_analysis.txt)" >> output/report.md
               #   fi
               # fi
 
